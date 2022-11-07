@@ -1,0 +1,66 @@
+{
+    "name": "if-react",
+    "version": "0.1.0",
+    "private": true,
+    "proxy": "http://localhost:4000/",
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "apexcharts": "^3.36.0",
+        "axios": "^0.27.2",
+        "bootstrap": "^5.2.0",
+        "immer": "^9.0.15",
+        "node-upbit": "^1.1.0",
+        "qs": "^6.11.0",
+        "quill": "^1.3.7",
+        "react": "^18.2.0",
+        "react-apexcharts": "^1.4.0",
+        "react-bootstrap": "^2.5.0",
+        "react-dom": "^18.2.0",
+        "react-helmet-async": "^1.3.0",
+        "react-redux": "^8.0.2",
+        "react-router-dom": "^6.4.0",
+        "react-scripts": "5.0.1",
+        "react-ts-tradingview-widgets": "^1.0.11",
+        "redux": "^4.0.1",
+        "redux-actions": "^2.6.5",
+        "redux-devtools-extension": "^2.13.9",
+        "redux-saga": "^1.0.3",
+        "sanitize-html": "^2.7.2",
+        "styled-components": "^5.3.5",
+        "use-upbit-api": "^1.1.5",
+        "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "deploy": "gh-pages -d build"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.13",
+        "gh-pages": "^4.0.0",
+        "postcss": "^8.4.18",
+        "tailwindcss": "^3.2.1"
+    }
+}

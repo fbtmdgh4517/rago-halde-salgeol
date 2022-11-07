@@ -1,0 +1,13 @@
+{
+    "name": "ragohaldesalgeol",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "heroku-prebuild": "cd frontend && npm ci && npm run build && mv build ../backend",
+        "start": "cd backend && npm ci && node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}
