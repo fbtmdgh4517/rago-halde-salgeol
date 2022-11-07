@@ -12,7 +12,8 @@ import jwtMiddleware from './lib/jwtMiddleware.js';
 import request from 'request';
 const app = new Koa();
 const router = new Router();
-const { PORT, MONGO_URI } = process.env;
+const { MONGO_URI } = process.env;
+const PORT = process.env.PORT || 4000;
 const __dirname = path.resolve();
 
 mongoose
@@ -62,7 +63,7 @@ router.get('/search/news', (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-const buildDirectory = path.resolve(__dirname, '../frontend/build');
+const buildDirectory = path.resolve(__dirname, '../backend/build');
 app.use(serve(buildDirectory));
 app.use(async (ctx) => {
     if (ctx.status === 404 && ctx.path.indexOf('/api') !== 0) {

@@ -4,8 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "heroku-prebuild": "cd frontend && npm ci && npm run build && mv build ../backend",
-        "start": "cd backend && npm ci && node app.js",
+        "frontend-build": "cd frontend && npm ci && npm run build && cd ../",
+        "backend-build": "cd backend && npm ci && cd ../",
+        "heroku-prebuild": "npm run frontend-build && npm run backend-build && mv ./frontend/build ./backend/build",
+        "start": "cd backend && npm run start",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
