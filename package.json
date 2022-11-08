@@ -6,7 +6,7 @@
     "scripts": {
         "frontend-build": "cd frontend && npm ci && npm run build && cd ../",
         "backend-build": "cd backend && npm ci && cd ../",
-        "heroku-prebuild": "npm run frontend-build && npm run backend-build && mv ./frontend/build ./backend/build",
+        "heroku-prebuild": "npm run frontend-build && npm run backend-build",
         "start": "cd backend && npm run start",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

@@ -63,7 +63,7 @@ router.get('/search/news', (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-const buildDirectory = path.resolve(__dirname, '../backend/build');
+const buildDirectory = path.resolve(__dirname, '../frontend/build');
 app.use(serve(buildDirectory));
 app.use(async (ctx) => {
     if (ctx.status === 404 && ctx.path.indexOf('/api') !== 0) {
