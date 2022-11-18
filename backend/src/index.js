@@ -16,7 +16,7 @@ const { MONGO_URI, PORT } = process.env;
 const __dirname = path.resolve();
 
 mongoose
-    .connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+    .connect(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(() => {
         console.log(MONGO_URI);
         console.log('Connected to mongodb');
