@@ -9,16 +9,14 @@ import path from 'path';
 import send from 'koa-send';
 import api from './api/index.js';
 import jwtMiddleware from './lib/jwtMiddleware.js';
-import request from 'request';
 import axios from '../node_modules/axios/index.js';
 const app = new Koa();
 const router = new Router();
-const { MONGO_URI } = process.env;
-const PORT = process.env.PORT || 4000;
+const { MONGO_URI, PORT } = process.env;
 const __dirname = path.resolve();
 
 mongoose
-    .connect(MONGO_URI)
+    .connect(MONGO_URI, { useNewUrlParser: true })
     .then(() => {
         console.log('Connected to mongodb');
     })
