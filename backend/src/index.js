@@ -18,6 +18,7 @@ const __dirname = path.resolve();
 mongoose
     .connect(MONGO_URI, { useNewUrlParser: true })
     .then(() => {
+        console.log(MONGO_URI);
         console.log('Connected to mongodb');
     })
     .catch((e) => {
