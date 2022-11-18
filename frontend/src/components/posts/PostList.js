@@ -41,14 +41,40 @@ const PostItemBlock = styled.div`
 const PostItem = ({ post }) => {
     const { publishedDate, author, tags, title, body, _id } = post;
     return (
-        <PostItemBlock>
-            <h2>
-                <Link to={`/@${author.username}/${_id}`}>{title}</Link>
-            </h2>
-            <SubInfo username={author.username} publishedDate={new Date(publishedDate)} />
-            <Tags tags={tags} />
-            <p>{body}</p>
-        </PostItemBlock>
+        <li className="py-4 ">
+            <div className="flex flex-col">
+                <div className="flex shrink-0 items-center gap-x-1">
+                    <Link
+                        className="truncate pl-1 text-sm font-normal text-gray-700 hover:text-blue-500 sm:text-sm"
+                        to={`/@${author.username}`}
+                    >
+                        {author.username}
+                    </Link>
+                    <div className="h-3 w-[1px] bg-gray-400 mx-1"></div>
+                    <span className="text-sm text-gray-700 sm:text:sm">
+                        {new Date(publishedDate).toLocaleDateString()}
+                    </span>
+                </div>
+                <div className="my-2">
+                    <Link
+                        className="truncate pl-1 text-sm font-semibold leading-6 hover:text-blue-500 sm:text-base"
+                        to={`/@${author.username}/${_id}`}
+                    >
+                        {title}
+                    </Link>
+                </div>
+            </div>
+            {/* <SubInfo username={author.username} publishedDate={new Date(publishedDate)} /> */}
+            {/* <div className="flex items-center gap-x-1 sm:gap-x-2">
+                {tags.map((tag) => (
+                    <span className="text-xs font-normal leading-5 text-gray-600 hover:text-blue-600 sm:text-sm">
+                        #{tag}
+                    </span>
+                ))}
+            </div> */}
+            {/* <Tags tags={tags} /> */}
+            {/* <p>{body}</p> */}
+        </li>
     );
     // const { publishedDate, author, title, _id } = post;
     // return (
@@ -79,23 +105,28 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
         return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
     }
     return (
-        <PostListBlock>
-            <WritePostButtonWrapper>
+        <div className="mt-4 max-w-5xl mx-auto">
+            <div className="">
                 {showWriteButton && (
-                    <Button cyan to="/write">
-                        새 글 작성하기
-                    </Button>
+                    <Link
+                        className="h-9 items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-white shadow-md hover:bg-blue-400"
+                        to="/write"
+                    >
+                        글 작성하기
+                    </Link>
                 )}
-            </WritePostButtonWrapper>
+            </div>
             {/*  로딩 중 아니고, 포스트 배열이 존재할 때만 보여줌 */}
             {!loading && posts && (
                 <div>
-                    {posts.map((post) => (
-                        <PostItem post={post} key={post._id} />
-                    ))}
+                    <ul className="divide-y divide-blue-300">
+                        {posts.map((post) => (
+                            <PostItem post={post} key={post._id} />
+                        ))}
+                    </ul>
                 </div>
             )}
-        </PostListBlock>
+        </div>
     );
     // return (
     //     <div className="border border-blue-600 max-w-5xl container mx-auto rounded-xl shadow-md p-4 my-4">

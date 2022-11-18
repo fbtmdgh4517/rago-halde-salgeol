@@ -8,6 +8,7 @@ import CommentsList from '../comments/CommentsList';
 
 const CommentsViewerBlock = styled(Responsive)`
     margin-top: 4rem;
+    max-width: 64rem;
 `;
 
 const CommentButtonBlock = styled.div`
@@ -20,9 +21,12 @@ const CommentsViewer = ({ loading, user, body, onChangeCommentInput, onWriteComm
     return (
         <CommentsViewerBlock>
             <CommentInput onChangeCommentInput={onChangeCommentInput} body={body} />
-            <CommentButtonBlock>
-                <Button onClick={onWriteComment}>댓글 작성</Button>
-            </CommentButtonBlock>
+            <button
+                className="h-9 items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-white shadow-md hover:bg-blue-400 mt-4 flex justify-end"
+                onClick={onWriteComment}
+            >
+                댓글 작성
+            </button>
             <CommentsList user={user} comments={comments} loading={loading} onToggleAskRemove={onToggleAskRemove} />
         </CommentsViewerBlock>
     );

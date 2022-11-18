@@ -140,24 +140,25 @@ function InputForm(props) {
     }, []);
 
     return (
-        <div id={props.id} className="border border-blue-600 max-w-5xl container mx-auto rounded-xl shadow-md p-4">
+        <div id={props.id} className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4">
             <h4 className="pb-4 text-xl font-semibold">코인 계산기</h4>
-            <form onSubmit={coinSubmitHandler} className="" action="">
+            <span>날짜, 마켓 종류, 코인, 금액을 입력하고 버튼을 누르면</span>
+            <form className="mt-4" onSubmit={coinSubmitHandler} action="">
                 <DateInputForm
-                    className="border border-blue-600 max-w-md container mx-auto rounded-xl shadow-md p-4"
+                    className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="dateForm"
                     inputRef={timeInputRef}
                 ></DateInputForm>
                 <br />
                 <MarketSelectForm
-                    className="border border-blue-600 max-w-md container mx-auto rounded-xl shadow-md p-4"
+                    className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="selectMarketForm"
                     inputRef={marketInputRef}
                     onChangeMarket={marketChangeHandler}
                 ></MarketSelectForm>
                 <br />
                 <CoinSelectForm
-                    className="border border-blue-600 max-w-md container mx-auto rounded-xl shadow-md p-4"
+                    className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="selectCoinForm"
                     inputRef={coinInputRef}
                     market={market}
@@ -165,20 +166,20 @@ function InputForm(props) {
                 ></CoinSelectForm>
                 <br />
                 <CoinPriceInputForm
-                    className="border border-blue-600 max-w-md container mx-auto rounded-xl shadow-md p-4"
+                    className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="priceForm"
                     inputRef={priceInputRef}
                 ></CoinPriceInputForm>
                 <br />
                 <AmountInputForm
-                    className="border border-blue-600 max-w-md container mx-auto rounded-xl shadow-md p-4"
+                    className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="amountForm"
                     onChangeAmount={amountInputChangeHandler}
                     inputRef={amountInputRef}
                     amount={amount}
                 ></AmountInputForm>
                 <br />
-                <button className="h-[35px] w-[85px] rounded-3xl bg-blue-500 px-2 py-0.5 text-base font-medium text-white hover:bg-blue-700 container mx-auto transition ease-in-out hover:scale-110">
+                <button className="shadow-md h-[35px] w-[85px] rounded-3xl bg-blue-500 px-2 py-0.5 text-base font-medium text-white hover:bg-blue-700 container mx-auto transition ease-in-out hover:scale-110">
                     샀었다면
                 </button>
             </form>

@@ -1,159 +1,77 @@
+import { memo, useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { Link } from 'react-router-dom';
+import { useFetchMarketCode, useUpbitWebSocket } from '../../node_modules/use-upbit-api/lib/index';
+import { MiniChart } from 'react-ts-tradingview-widgets';
+
+const RealTimePriceTable = memo(function RealTimePriceTable({ socketData }) {
+    socketData.sort(function (a, b) {
+        return b.acc_trade_price_24h - a.acc_trade_price_24h;
+    });
+    socketData = socketData.slice(0, 5);
+    return (
+        <table className="container mx-auto text-center">
+            <thead>
+                <tr>
+                    <th className="py-3">코인</th>
+                    <th>현재가</th>
+                    <th>전일 대비 값</th>
+                    <th>전일 대비 등락률</th>
+                    <th>24시간 누적 거래대금</th>
+                    <th>52주 최고가</th>
+                    <th>52주 최저가</th>
+                </tr>
+            </thead>
+            <tbody>
+                {socketData.map((data) => (
+                    <tr className="hover:bg-blue-100/60" key={data.code}>
+                        <td className="py-1">{data.code}</td>
+                        <td>{data.trade_price.toLocaleString()}</td>
+                        <td className={data.signed_change_price > 0 ? 'text-red-500' : 'text-blue-600'}>
+                            {data.signed_change_price}
+                        </td>
+                        <td className={data.signed_change_rate > 0 ? 'text-red-500' : 'text-blue-600'}>
+                            {(data.signed_change_rate * 100).toFixed(2)}%
+                        </td>
+                        <td>{data.acc_trade_price_24h.toLocaleString('ko-KR', { maximumFractionDigits: 0 })}원</td>
+                        <td>{data.highest_52_week_price.toLocaleString()}</td>
+                        <td>{data.lowest_52_week_price.toLocaleString()}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
+});
 
 const InterestCoin = () => {
+    const { isLoading, marketCodes } = useFetchMarketCode();
+    const [targetMarketCode, setTargetMarketCode] = useState([]);
+
+    useEffect(() => {
+        if (!isLoading && marketCodes) {
+            setTargetMarketCode(marketCodes.filter((ele) => ele.market.includes('KRW')));
+        }
+    }, [isLoading, marketCodes]);
+
+    // ticker socket state
+    const webSocketOptions = { throttle_time: 400, max_length_queue: 100 };
+    const { socket, isConnected, socketData } = useUpbitWebSocket(targetMarketCode, 'ticker', webSocketOptions);
+
+    // 연결 컨트롤 버튼 이벤트 핸들러
+    const connectButtonHandler = (evt) => {
+        if (isConnected && socket) {
+            socket.close();
+        }
+    };
+
     return (
-        <div className="border border-blue-600 max-w-5xl container mx-auto rounded-xl shadow-md p-4 m-4">
-            <h4 className="pb-4 text-xl font-semibold">관심종목</h4>
-            <div className="grid grid-cols-2 gap-4">
-                <table className="table-auto border border-blue-500 text-center">
-                    <thead className="table-dark">
-                        <tr>
-                            <th scope="col" className="border border-blue-500">
-                                코인명
-                            </th>
-                            <th scope="col" className="border border-blue-500">
-                                현재 가격(krw)
-                            </th>
-                            <th scope="col" className="border border-blue-500">
-                                현재 가격(usd)
-                            </th>
-                            <th scope="col" className="border border-blue-500">
-                                변동률
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" className="border border-blue-500">
-                                무슨코인
-                            </th>
-                            <td className="border border-blue-500">
-                                10000 <span>krw</span>
-                            </td>
-                            <td className="border border-blue-500">
-                                10000 <span>usd</span>
-                            </td>
-                            <td className="border border-blue-500">10000 몇퍼</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" className="border border-blue-500">
-                                무슨코인2
-                            </th>
-                            <td className="border border-blue-500">
-                                10000 <span>krw</span>
-                            </td>
-                            <td className="border border-blue-500">
-                                10000 <span>usd</span>
-                            </td>
-                            <td className="border border-blue-500">10000 몇퍼</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" className="border border-blue-500">
-                                무슨코인3
-                            </th>
-                            <td className="border border-blue-500">
-                                10000 <span>krw</span>
-                            </td>
-                            <td className="border border-blue-500">
-                                10000 <span>usd</span>
-                            </td>
-                            <td className="border border-blue-500">10000 몇퍼</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" className="border border-blue-500">
-                                무슨코인4
-                            </th>
-                            <td className="border border-blue-500">
-                                10000 <span>krw</span>
-                            </td>
-                            <td className="border border-blue-500">
-                                10000 <span>usd</span>
-                            </td>
-                            <td className="border border-blue-500">10000 몇퍼</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" className="border border-blue-500">
-                                무슨코인5
-                            </th>
-                            <td className="border border-blue-500">
-                                10000 <span>krw</span>
-                            </td>
-                            <td className="border border-blue-500">
-                                10000 <span>usd</span>
-                            </td>
-                            <td className="border border-blue-500">10000 몇퍼</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="">
-                    <ReactApexChart
-                        type="line"
-                        series={[
-                            {
-                                name: 'High - 2013',
-                                data: [28, 29, 33, 36, 32, 32, 33],
-                            },
-                            {
-                                name: 'Low - 2013',
-                                data: [12, 11, 14, 18, 17, 13, 13],
-                            },
-                        ]}
-                        width="350"
-                        options={{
-                            chart: {
-                                type: 'line',
-                                dropShadow: {
-                                    enabled: true,
-                                    color: '#000',
-                                    top: 18,
-                                    left: 7,
-                                    blur: 10,
-                                    opacity: 0.2,
-                                },
-                                toolbar: {
-                                    show: false,
-                                },
-                            },
-                            colors: ['#77B6EA', '#545454'],
-                            stroke: {
-                                curve: 'smooth',
-                            },
-                            title: {
-                                text: 'Average High & Low Temperature',
-                                align: 'left',
-                            },
-                            grid: {
-                                borderColor: '#e7e7e7',
-                            },
-                            markers: {
-                                size: 1,
-                            },
-                            xaxis: {
-                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                                title: {
-                                    text: 'Month',
-                                },
-                            },
-                            yaxis: {
-                                title: {
-                                    text: 'Temperature',
-                                },
-                                min: 5,
-                                max: 40,
-                            },
-                            legend: {
-                                position: 'top',
-                                horizontalAlign: 'right',
-                                floating: true,
-                                offsetY: -25,
-                                offsetX: -5,
-                            },
-                        }}
-                    />
-                </div>
+        <>
+            <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 mb-16">
+                <h4 className="pb-4 text-xl font-semibold">거래량 상위 코인</h4>
+                {socketData ? <RealTimePriceTable socketData={socketData} /> : <div>Ticker Loading...</div>}
             </div>
-        </div>
+        </>
     );
 };
 
-export default InterestCoin;
+export default memo(InterestCoin);

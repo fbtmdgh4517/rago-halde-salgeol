@@ -1,23 +1,58 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from '../../node_modules/axios/index';
+
 const NewsListPreview = () => {
-    //게시판 미리보기랑 뉴스 미리보기를 따로 놔야되나 아니면 같이 놓고 네비게이션을 고를수 있게 해야되나
+    const [news, setNews] = useState([]);
+    const newsArray = [];
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/search/news');
+                console.log(response.data.items);
+                for (let i = 0; i < 10; i++) {
+                    let newsItem = {};
+                    newsItem.title = response.data.items[i].title.replace(/(<([^>]+)>)|&quot;|&apos;|&amp;/gi, '');
+                    newsItem.link = response.data.items[i].link.replace(/(<([^>]+)>)|&quot;/gi, '');
+                    newsItem.description = response.data.items[i].description.replace(/(<([^>]+)>)|&quot;/gi, '');
+                    newsItem.pubDate = response.data.items[i].pubDate.replace(/(<([^>]+)>)|&quot;/gi, '');
+                    newsArray.push(newsItem);
+                }
+                console.log(newsArray);
+                setNews(newsArray);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
-        <div className="border border-blue-600 drop-shadow-md max-w-5xl container mx-auto rounded-xl shadow-md p-4 m-4">
-            <h4 className="pb-4 text-xl font-semibold">뉴스</h4>
-            <table className="table-auto w-full">
-                <tbody>
-                    <tr>
-                        <td className="">
-                            <a className="" href="해당 뉴스 링크">
-                                뉴스
-                            </a>
-                        </td>
-                        <td className="text-right">
-                            <span>2022/22/22</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <>
+            <div className="bg-white border border-blue-100 max-w-5xl mx-auto rounded-md shadow-md p-4 mb-16">
+                <div className="grid grid-cols-4 pb-4">
+                    <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">뉴스</h4>
+                    <Link to="/news" className="text-base text-gray-700 text-right col-span-1">
+                        더보기
+                    </Link>
+                </div>
+                <table className="table-auto w-full">
+                    <tbody>
+                        {news.map((news) => (
+                            <tr className="hover:bg-blue-100/60">
+                                <td className="pt-1">
+                                    <a href={news.link}>{news.title}</a>
+                                </td>
+                                <td className="text-right">
+                                    <span className="text-sm">{new Date(news.pubDate).toLocaleString()}</span>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </>
     );
 };
 

@@ -4,11 +4,12 @@ import { useFetchMarketCode, useUpbitWebSocket } from '../../node_modules/use-up
 import HeaderContainer from '../containers/common/HeaderContainer';
 
 const RealTimePriceTable = memo(function RealTimePriceTable({ socketData }) {
+    console.log(socketData[0].code);
     return (
         <table className="container mx-auto text-center">
             <thead>
                 <tr>
-                    <th>코인</th>
+                    <th className="py-3">코인</th>
                     <th>현재가</th>
                     <th>전일 대비 값</th>
                     <th>전일 대비 등락률</th>
@@ -19,13 +20,13 @@ const RealTimePriceTable = memo(function RealTimePriceTable({ socketData }) {
             </thead>
             <tbody>
                 {socketData.map((data) => (
-                    <tr key={data.code}>
-                        <td>{data.code}</td>
+                    <tr className="hover:bg-blue-100/60" key={data.code}>
+                        <td className="py-1">{data.code}</td>
                         <td>{data.trade_price.toLocaleString()}</td>
-                        <td className={data.signed_change_price > 0 ? 'text-red-500' : 'text-blue-700'}>
+                        <td className={data.signed_change_price > 0 ? 'text-red-600' : 'text-blue-600'}>
                             {data.signed_change_price}
                         </td>
-                        <td className={data.signed_change_rate > 0 ? 'text-red-500' : 'text-blue-700'}>
+                        <td className={data.signed_change_rate > 0 ? 'text-red-600' : 'text-blue-600'}>
                             {(data.signed_change_rate * 100).toFixed(2)}%
                         </td>
                         <td>{data.acc_trade_price_24h.toLocaleString('ko-KR', { maximumFractionDigits: 0 })}원</td>
@@ -59,20 +60,12 @@ const QuotePage = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get()
-    //         }
-    //     }
-    // }, []);
-
     return (
         <>
             <HeaderContainer />
-            <div className="border border-blue-600 max-w-5xl container mx-auto rounded-xl shadow-md p-4 my-4">
+            <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4">
                 <h4 className="pb-4 text-xl font-semibold">시세 조회</h4>
-                <div>Connected : {isConnected ? '🟢' : '🔴'}</div>
+                <div className="pb-3">Connected : {isConnected ? '🟢' : '🔴'}</div>
                 {socketData ? <RealTimePriceTable socketData={socketData} /> : <div>Ticker Loading...</div>}
             </div>
         </>

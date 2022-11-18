@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const HeaderBlock = styled.div`
     position: sticky;
@@ -37,60 +38,66 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const navClickHandler = () => {
+        setIsOpen(!isOpen);
+    };
     return (
         <>
-            <header className="border-blue-400 sticky top-0 z-20 flex h-16 items-center border-b-[0.5px] bg-white py-5 text-base font-medium leading-6">
+            <header className="border-blue-300 sticky top-0 z-20 flex h-16 items-center border-b bg-white py-5 text-base leading-6 font-semibold">
                 <nav className="mx-auto flex w-full max-w-7xl px-4 lg:px-0">
                     <div className="flex w-full items-center justify-between">
                         <div className="flex ">
-                            <a href="/" className="flex items-center text-gray-900">
-                                <span className="">라고 할때 살걸</span>
-                            </a>
-                            <div className="ml-3 hidden items-center space-x-7 md:flex lg:ml-[105px]">
+                            <Link to="/" className="flex items-center text-gray-900">
+                                <span className="font-bold">라고 할때 살걸</span>
+                            </Link>
+                            <div className="ml-3 hidden items-center space-x-7 md:flex lg:ml-[105px] ">
                                 <div className="shrink-0">
-                                    <a
-                                        className="text-blue-600 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
-                                        href="/postList"
+                                    <Link
+                                        onClick={navClickHandler}
+                                        className={`text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200`}
+                                        to="/postList"
                                     >
-                                        <span className="hover:no-underline">게시판</span>
-                                    </a>
+                                        <span className="hover:no-underline font-semibold">게시판</span>
+                                    </Link>
                                 </div>
                                 <div className="h-3 w-[1px] bg-gray-400"></div>
                                 <div className="shrink-0">
-                                    <a
-                                        className="text-blue-600 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
-                                        href="/calculator"
+                                    <Link
+                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
+                                        to="/calculator"
                                     >
-                                        <span className="hover:no-underline">계산기</span>
-                                    </a>
+                                        <span className="hover:no-underline font-semibold">계산기</span>
+                                    </Link>
                                 </div>
                                 <div className="h-3 w-[1px] bg-gray-400"></div>
                                 <div className="shrink-0">
-                                    <a
-                                        className="text-blue-600 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
-                                        href="/quote"
+                                    <Link
+                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
+                                        to="/quote"
                                     >
-                                        <span className="hover:no-underline">시세 조회</span>
-                                    </a>
+                                        <span className="hover:no-underline font-semibold">시세 조회</span>
+                                    </Link>
                                 </div>
                                 <div className="h-3 w-[1px] bg-gray-400"></div>
                                 <div className="shrink-0">
-                                    <a
-                                        className="text-blue-600 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
-                                        href="/news"
+                                    <Link
+                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
+                                        to="/news"
                                     >
-                                        <span className="hover:no-underline">뉴스</span>
-                                    </a>
+                                        <span className="hover:no-underline font-semibold">뉴스</span>
+                                    </Link>
                                 </div>
-                                <div className="h-3 w-[1px] bg-gray-400"></div>
+                                {/* <div className="h-3 w-[1px] bg-gray-400"></div>
                                 <div className="shrink-0">
                                     <a
-                                        className="text-blue-600 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
+                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
                                         href="/notice"
                                     >
-                                        <span className="hover:no-underline">공지사항</span>
+                                        <span className="hover:no-underline font-semibold">공지사항</span>
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -98,7 +105,7 @@ const Header = ({ user, onLogout }) => {
                         <div className="hidden items-center md:flex">
                             <Link
                                 to="/mypage"
-                                className="ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium hover:bg-gray-200 sm:flex lg:ml-10"
+                                className="text-blue-500 ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium hover:bg-gray-200 sm:flex lg:ml-10"
                             >
                                 {user.username}
                             </Link>
@@ -112,7 +119,7 @@ const Header = ({ user, onLogout }) => {
                     ) : (
                         <div className="hidden items-center md:flex">
                             <Link
-                                className="ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium hover:bg-gray-200 sm:flex lg:ml-10"
+                                className="text-blue-500 ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium hover:bg-gray-200 sm:flex lg:ml-10"
                                 to="/login"
                             >
                                 로그인

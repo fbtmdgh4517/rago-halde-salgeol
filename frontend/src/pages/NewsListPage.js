@@ -7,7 +7,6 @@ const NewsListPage = () => {
         <>
             <HeaderContainer />
             <NewsListContainer />
-            <PaginationContainer />
         </>
     );
 };

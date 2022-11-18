@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const buttonStyle = css`
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     padding: 0.25rem 1rem;
     color: white;
     outline: none;
     cursor: pointer;
 
-    background: ${palette.gray[8]};
+    background-color: rgb(59, 130, 246);
     &:hover {
-        background: ${palette.gray[6]};
+        background-color: rgb(96, 165, 250);
     }
     ${(props) =>
         props.fullWidth &&

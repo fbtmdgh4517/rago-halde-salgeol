@@ -26,7 +26,7 @@ function ResultForm(props) {
     };
 
     return (
-        <div id={props.id} className="border border-blue-600 max-w-5xl container mx-auto rounded-xl shadow-md p-4 m-4">
+        <div id={props.id} className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 m-4">
             {props.resultText.endsWith('벌었다.') && renderResult('red')}
             {props.resultText.endsWith('잃었다.') && renderResult('blue')}
         </div>

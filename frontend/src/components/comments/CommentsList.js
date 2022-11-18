@@ -6,6 +6,7 @@ import SubInfo from '../common/SubInfo';
 
 const CommentsListBlock = styled(Responsive)`
     margin-top: 3rem;
+    max-width: 64rem;
 `;
 const CommentItemBlock = styled.div`
     padding-top: 1rem;
@@ -60,10 +61,10 @@ const CommentItem = ({ user, comment, onToggleAskRemove }) => {
 
 const CommentsList = ({ loading, user, comments, onToggleAskRemove }) => {
     return (
-        <CommentsListBlock>
-            <div>
+        <div className="mt-12 max-w-5xl">
+            <div className="">
                 {!loading && comments && (
-                    <div>
+                    <>
                         {comments.map((comment) => (
                             <CommentItem
                                 user={user}
@@ -72,10 +73,10 @@ const CommentsList = ({ loading, user, comments, onToggleAskRemove }) => {
                                 key={comment._id}
                             />
                         ))}
-                    </div>
+                    </>
                 )}
             </div>
-        </CommentsListBlock>
+        </div>
     );
 };
 

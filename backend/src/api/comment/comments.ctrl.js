@@ -46,7 +46,6 @@ export const update = async (ctx) => {
         await Comment.findByIdAndUpdate(commentId, ctx.request.body.body, {
             new: true,
         });
-        //todo: 업데이트 쿼리를 찾아보자.
         const comments = await Comment.find({ postId: ctx.params.postId })
             .populate('authorId', 'username')
             .sort({ createdAt: 1 })

@@ -7,6 +7,7 @@ import Tags from '../common/Tags';
 
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
+    max-width: 64rem;
 `;
 const PostHead = styled.div`
     border-bottom: 1px solid ${palette.gray[2]};
@@ -39,11 +40,11 @@ const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
     const { title, body, author, publishedDate, tags } = post;
     return (
         <PostViewerBlock>
-            <Helmet>
+            {/* <Helmet>
                 <title>{title} - 라고 할때 살걸</title>
-            </Helmet>
+            </Helmet> */}
             <PostHead>
-                <h1>{title}</h1>
+                <h2 className="text-4xl font-semibold">{title}</h2>
                 <SubInfo username={author.username} publishedDate={publishedDate} hasMarginTop></SubInfo>
                 <Tags tags={tags}></Tags>
             </PostHead>

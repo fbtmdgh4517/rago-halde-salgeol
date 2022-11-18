@@ -5,7 +5,7 @@ function AmountInputForm(props) {
 
     return (
         <div className="max-w-md container mx-auto" id={props.id}>
-            <label className="" htmlFor="howMany">
+            <label className="text-lg font-semibold" htmlFor="howMany">
                 코인의 개수
             </label>
             <input

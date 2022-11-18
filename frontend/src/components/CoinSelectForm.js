@@ -5,7 +5,7 @@ function CoinSelectForm(props) {
 
     return (
         <div className="max-w-md container mx-auto" id={props.id}>
-            <label className="" htmlFor="selectCoin">
+            <label className="text-lg font-semibold" htmlFor="selectCoin">
                 어떤 코인을
             </label>
             <select className={props.className} id="selectCoin" ref={props.inputRef}>
