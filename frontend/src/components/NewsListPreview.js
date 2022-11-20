@@ -29,30 +29,30 @@ const NewsListPreview = () => {
     }, []);
 
     return (
-        <>
-            <div className="bg-white border border-blue-100 max-w-5xl mx-auto rounded-md shadow-md p-4 mb-16">
-                <div className="grid grid-cols-4 pb-4">
-                    <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">뉴스</h4>
-                    <Link to="/news" className="text-base text-gray-700 text-right col-span-1">
-                        더보기
-                    </Link>
-                </div>
-                <table className="table-auto w-full">
-                    <tbody>
-                        {news.map((news) => (
-                            <tr className="hover:bg-blue-100/60">
-                                <td className="pt-1">
-                                    <a href={news.link}>{news.title}</a>
-                                </td>
-                                <td className="text-right">
-                                    <span className="text-sm">{new Date(news.pubDate).toLocaleString()}</span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div className="bg-white border border-blue-200 w-[500px] shadow-md p-4 mb-9 rounded-xl">
+            <div className="grid grid-cols-4 pb-4">
+                <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">뉴스</h4>
+                <Link to="/news" className="text-base text-gray-700 text-right col-span-1">
+                    더보기
+                </Link>
             </div>
-        </>
+            <table className="table-auto w-full">
+                <tbody>
+                    {news.map((news) => (
+                        <tr className="hover:bg-blue-100/60">
+                            <td className="pt-1">
+                                <a href={news.link}>
+                                    {news.title.length < 30 ? news.title : `${news.title.slice(0, 30)}...`}
+                                </a>
+                            </td>
+                            <td className="text-right">
+                                <span className="text-sm">{new Date(news.pubDate).toLocaleDateString()}</span>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 

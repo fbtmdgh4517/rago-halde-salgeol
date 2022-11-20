@@ -66,7 +66,7 @@ const InterestCoin = () => {
 
     return (
         <>
-            <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 mb-16">
+            <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 mb-9">
                 <h4 className="pb-4 text-xl font-semibold">거래량 상위 코인</h4>
                 {socketData ? <RealTimePriceTable socketData={socketData} /> : <div>Ticker Loading...</div>}
             </div>

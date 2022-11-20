@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
 import { listPosts } from '../modules/posts';
-import PostItem from './posts/PostItem';
+import PostItemPreview from './posts/PostItemPreview';
 import PostList from './posts/PostList';
 
 const PostListPreview = () => {
@@ -26,7 +26,7 @@ const PostListPreview = () => {
     }, [dispatch, searchParams, username]);
 
     return (
-        <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 mb-16">
+        <div className="bg-white border border-blue-200 w-[500px] mx-auto shadow-md p-4 mb-9 rounded-xl">
             <div className="grid grid-cols-4 pb-4">
                 <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">게시판</h4>
                 <Link to="/postList" className="text-base text-gray-700 text-right col-span-1">
@@ -38,7 +38,7 @@ const PostListPreview = () => {
                     <tbody className="">
                         {posts.map((post) => (
                             <tr className="hover:bg-blue-100/60">
-                                <PostItem post={post} key={post._id} />
+                                <PostItemPreview post={post} key={post._id} />
                             </tr>
                         ))}
                     </tbody>

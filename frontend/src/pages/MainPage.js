@@ -13,8 +13,10 @@ const MainPage = () => {
             <ExchangeLinks />
             <InterestCoin />
             <CoinPriceUpTopRank />
-            <NewsListPreview />
-            <PostListPreview />
+            <div className="grid grid-cols-2 gap-1 max-w-5xl mx-auto">
+                <NewsListPreview />
+                <PostListPreview />
+            </div>
         </>
     );
 };
