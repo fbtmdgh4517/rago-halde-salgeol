@@ -10,7 +10,7 @@ const NewsListPreview = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/search/news');
-                console.log(response.data.items);
+                // console.log(response.data.items);
                 for (let i = 0; i < 10; i++) {
                     let newsItem = {};
                     newsItem.title = response.data.items[i].title.replace(/(<([^>]+)>)|&quot;|&apos;|&amp;/gi, '');
@@ -19,7 +19,7 @@ const NewsListPreview = () => {
                     newsItem.pubDate = response.data.items[i].pubDate.replace(/(<([^>]+)>)|&quot;/gi, '');
                     newsArray.push(newsItem);
                 }
-                console.log(newsArray);
+                // console.log(newsArray);
                 setNews(newsArray);
             } catch (e) {
                 console.log(e);
@@ -29,7 +29,7 @@ const NewsListPreview = () => {
     }, []);
 
     return (
-        <div className="bg-white border border-blue-200 w-[500px] shadow-md p-4 mb-9 rounded-xl">
+        <div className="bg-white border border-blue-200 w-full shadow-md p-4 mb-9 rounded-xl">
             <div className="grid grid-cols-4 pb-4">
                 <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">뉴스</h4>
                 <Link to="/news" className="text-base text-gray-700 text-right col-span-1">
@@ -42,7 +42,7 @@ const NewsListPreview = () => {
                         <tr className="hover:bg-blue-100/60">
                             <td className="pt-1">
                                 <a href={news.link}>
-                                    {news.title.length < 30 ? news.title : `${news.title.slice(0, 30)}...`}
+                                    {news.title.length < 32 ? news.title : `${news.title.slice(0, 32)}...`}
                                 </a>
                             </td>
                             <td className="text-right">

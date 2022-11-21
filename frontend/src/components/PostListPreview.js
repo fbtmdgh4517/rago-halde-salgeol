@@ -17,7 +17,8 @@ const PostListPreview = () => {
         user: user.user,
     }));
 
-    console.log(posts);
+    // console.log(posts[0]);
+    // const postsSlice = posts.slice(0, 5);
 
     useEffect(() => {
         const tag = searchParams.get('tag');
@@ -26,7 +27,7 @@ const PostListPreview = () => {
     }, [dispatch, searchParams, username]);
 
     return (
-        <div className="bg-white border border-blue-200 w-[500px] mx-auto shadow-md p-4 mb-9 rounded-xl">
+        <div className="bg-white border border-blue-200 w-full mx-auto shadow-md p-4 mb-9 rounded-xl">
             <div className="grid grid-cols-4 pb-4">
                 <h4 className="max-w-5xl rounded-xl text-xl font-semibold col-span-3">게시판</h4>
                 <Link to="/postList" className="text-base text-gray-700 text-right col-span-1">

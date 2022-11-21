@@ -21,16 +21,6 @@ const NewsListContainer = () => {
                 }
                 console.log(newsArray);
                 setNews(newsArray);
-                // const response = await axios.get('/v1/search/news?display=30&query=코인', {
-                //     method: 'GET',
-                //     headers: {
-                //         'Access-Control-Allow-Origin': '*',
-                //         'Content-Type': 'application/json',
-                //         'X-Naver-Client-Id': client_id,
-                //         'X-Naver-Client-Secret': client_secret,
-                //     },
-                // });
-                // console.log(response);
             } catch (e) {
                 console.log(e);
             }

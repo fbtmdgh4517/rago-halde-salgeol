@@ -46,7 +46,7 @@ const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
             <PostHead>
                 <h2 className="text-4xl font-semibold">{title}</h2>
                 <SubInfo username={author.username} publishedDate={publishedDate} hasMarginTop></SubInfo>
-                <Tags tags={tags}></Tags>
+                {/* <Tags tags={tags}></Tags> */}
             </PostHead>
             {actionButtons}
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />

@@ -1,6 +1,6 @@
 const ExchangeLinks = () => {
     return (
-        <div className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4 mb-9">
+        <div className="border border-blue-200 max-w-6xl mx-auto rounded-xl shadow-md p-4 mb-9">
             <h4 className="pb-4 text-xl font-semibold">코인 거래소</h4>
             <div className="grid grid-cols-6 gap-4 justify-items-center">
                 <a href="https://upbit.com" className="hover:bg-blue-100/60 text-center">

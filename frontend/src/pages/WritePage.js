@@ -14,7 +14,7 @@ const WritePage = () => {
                     <title>글 작성하기</title>
                 </Helmet>
                 <EditorContainer />
-                <TagBoxContainer />
+                {/* <TagBoxContainer /> */}
                 <WriteActionButtonsContainer />
             </Responsive>
         </>

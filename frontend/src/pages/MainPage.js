@@ -13,7 +13,7 @@ const MainPage = () => {
             <ExchangeLinks />
             <InterestCoin />
             <CoinPriceUpTopRank />
-            <div className="grid grid-cols-2 gap-1 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 gap-9 max-w-6xl mx-auto">
                 <NewsListPreview />
                 <PostListPreview />
             </div>

@@ -64,11 +64,13 @@ function InputForm(props) {
             }
 
             const currentCoinInfo = await axios.get(`https://api.upbit.com/v1/ticker?markets=${enteredCoin}`);
+            console.log(currentCoinInfo.data[0]);
             const currentCoinMarket = currentCoinInfo.data[0].market;
             const currentCoinPrice = currentCoinInfo.data[0].trade_price;
             const currentCoinName = coins.filter((coin) => {
                 return coin.market === currentCoinMarket;
             });
+            // console.log(currentCoinName);
 
             if (enteredPrice === '') {
                 alert('코인의 가격를 입력하세요');
@@ -76,55 +78,68 @@ function InputForm(props) {
                 const currentPriceMultiplyAmount = parseInt(currentCoinPrice * enteredAmount);
                 const timePriceMultiplyAmount = parseInt(selectedTimeCoinPrice * enteredAmount);
 
-                if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('KRW')) {
+                if (currentPriceMultiplyAmount > timePriceMultiplyAmount) {
                     props.setResultText(
                         `${dateText}에 ${currentCoinName[0].korean_name}을(를) ${enteredAmount}개 샀다면 ${(
                             currentPriceMultiplyAmount - timePriceMultiplyAmount
                         ).toLocaleString()}원 벌었다.`
                     );
-                } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('KRW')) {
+                } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount) {
                     props.setResultText(
                         `${dateText}에 ${currentCoinName[0].korean_name}을(를) ${enteredAmount}개 샀다면 ${(
                             timePriceMultiplyAmount - currentPriceMultiplyAmount
                         ).toLocaleString()}원 잃었다.`
                     );
                 }
+                // if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('KRW')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${currentCoinName[0].korean_name}을(를) ${enteredAmount}개 샀다면 ${(
+                //             currentPriceMultiplyAmount - timePriceMultiplyAmount
+                //         ).toLocaleString()}원 벌었다.`
+                //     );
+                // } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('KRW')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${currentCoinName[0].korean_name}을(를) ${enteredAmount}개 샀다면 ${(
+                //             timePriceMultiplyAmount - currentPriceMultiplyAmount
+                //         ).toLocaleString()}원 잃었다.`
+                //     );
+                // }
 
-                if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('BTC')) {
-                    props.setResultText(
-                        `${dateText}에 ${
-                            currentCoinName[0].korean_name
-                        }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
-                            currentPriceMultiplyAmount - timePriceMultiplyAmount
-                        ).toLocaleString()}BTC 벌었다.`
-                    );
-                } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('BTC')) {
-                    props.setResultText(
-                        `${dateText}에 ${
-                            currentCoinName[0].korean_name
-                        }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
-                            timePriceMultiplyAmount - currentPriceMultiplyAmount
-                        ).toLocaleString()}BTC 잃었다.`
-                    );
-                }
+                // if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('BTC')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${
+                //             currentCoinName[0].korean_name
+                //         }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
+                //             currentPriceMultiplyAmount - timePriceMultiplyAmount
+                //         ).toLocaleString()}BTC 벌었다.`
+                //     );
+                // } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('BTC')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${
+                //             currentCoinName[0].korean_name
+                //         }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
+                //             timePriceMultiplyAmount - currentPriceMultiplyAmount
+                //         ).toLocaleString()}BTC 잃었다.`
+                //     );
+                // }
 
-                if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('USDT')) {
-                    props.setResultText(
-                        `${dateText}에 ${
-                            currentCoinName[0].korean_name
-                        }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
-                            currentPriceMultiplyAmount - timePriceMultiplyAmount
-                        ).toLocaleString()}$ 벌었다.`
-                    );
-                } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('USDT')) {
-                    props.setResultText(
-                        `${dateText}에 ${
-                            currentCoinName[0].korean_name
-                        }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
-                            timePriceMultiplyAmount - currentPriceMultiplyAmount
-                        ).toLocaleString()}$ 잃었다.`
-                    );
-                }
+                // if (currentPriceMultiplyAmount > timePriceMultiplyAmount && market.startsWith('USDT')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${
+                //             currentCoinName[0].korean_name
+                //         }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
+                //             currentPriceMultiplyAmount - timePriceMultiplyAmount
+                //         ).toLocaleString()}$ 벌었다.`
+                //     );
+                // } else if (currentPriceMultiplyAmount < timePriceMultiplyAmount && market.startsWith('USDT')) {
+                //     props.setResultText(
+                //         `${dateText}에 ${
+                //             currentCoinName[0].korean_name
+                //         }을(를) ${enteredPrice}${enteredAmount}개 샀다면 ${(
+                //             timePriceMultiplyAmount - currentPriceMultiplyAmount
+                //         ).toLocaleString()}$ 잃었다.`
+                //     );
+                // }
             }
         } catch (e) {
             alert('날짜와 코인을 선택하세요');
@@ -150,13 +165,13 @@ function InputForm(props) {
                     inputRef={timeInputRef}
                 ></DateInputForm>
                 <br />
-                <MarketSelectForm
+                {/* <MarketSelectForm
                     className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="selectMarketForm"
                     inputRef={marketInputRef}
                     onChangeMarket={marketChangeHandler}
-                ></MarketSelectForm>
-                <br />
+                ></MarketSelectForm> */}
+                {/* <br /> */}
                 <CoinSelectForm
                     className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
                     id="selectCoinForm"

@@ -30,10 +30,10 @@ function App() {
                 <Route path="/write" element={<WritePage />} />
                 <Route path="/postList" element={<PostListPage />} />
                 <Route path="/news" element={<NewsListPage />} />
-                <Route path="/notice" element={<NoticePage />} />
+                {/* <Route path="/notice" element={<NoticePage />} /> */}
                 {/* <Route path="/@:username" element={<PostListPage />} /> */}
                 <Route path="/@:username/:postId" element={<PostPage />} />
-                <Route path="/mypage" element={<MyPage />} />
+                {/* <Route path="/mypage" element={<MyPage />} /> */}
                 <Route path="/calculator" element={<CalculatorPage />} />
                 <Route path="/quote" element={<QuotePage />} />
             </Routes>

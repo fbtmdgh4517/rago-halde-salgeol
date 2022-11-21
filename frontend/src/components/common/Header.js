@@ -103,12 +103,9 @@ const Header = ({ user, onLogout }) => {
                     </div>
                     {user ? (
                         <div className="hidden items-center md:flex">
-                            <Link
-                                to="/mypage"
-                                className="text-blue-500 ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium hover:bg-gray-200 sm:flex lg:ml-10"
-                            >
+                            <div className="text-blue-500 ml-2 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl border border-blue-500 text-center text-base font-medium sm:flex lg:ml-10">
                                 {user.username}
-                            </Link>
+                            </div>
                             <button
                                 className="ml-2.5 hidden h-[35px] w-[85px] items-center justify-center rounded-3xl bg-blue-500 px-2 py-0.5 text-base font-medium text-white hover:bg-blue-700 sm:flex"
                                 onClick={onLogout}

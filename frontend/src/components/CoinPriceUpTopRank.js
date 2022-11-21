@@ -138,7 +138,7 @@ const CoinPriceUpTopRank = () => {
 
     return (
         <>
-            <div className="bg-white max-w-5xl mx-auto text-center mb-9 rounded-xl shadow-md border border-blue-200">
+            <div className="bg-white max-w-6xl mx-auto text-center mb-9 rounded-xl shadow-md border border-blue-200">
                 <div className="max-w-5xl mx-auto flex">
                     <div className="w-3/6 pr-4">
                         <h4 className=" text-xl font-bold pt-4">상승률 상위 코인</h4>
