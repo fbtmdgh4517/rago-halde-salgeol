@@ -43,7 +43,8 @@ const NewsListContainer = () => {
                     {news.map((news) => (
                         <tr className="hover:bg-blue-100/60">
                             <td className="pt-1">
-                                <a href={news.link}>{news.title}</a>
+                                <button onClick={() => window.open(`${news.link}`, '_blank')}>{news.title}</button>
+                                {/* <a href={news.link}>{news.title}</a> */}
                             </td>
                             <td className="text-center">
                                 <span>{new Date(news.pubDate).toLocaleString()}</span>

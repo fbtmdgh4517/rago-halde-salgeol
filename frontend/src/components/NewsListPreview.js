@@ -41,9 +41,12 @@ const NewsListPreview = () => {
                     {news.map((news) => (
                         <tr className="hover:bg-blue-100/60">
                             <td className="pt-1">
-                                <a href={news.link}>
+                                <button onClick={() => window.open(`${news.link}`, '_blank')}>
                                     {news.title.length < 32 ? news.title : `${news.title.slice(0, 32)}...`}
-                                </a>
+                                </button>
+                                {/* <a href={news.link}>
+                                    {news.title.length < 32 ? news.title : `${news.title.slice(0, 32)}...`}
+                                </a> */}
                             </td>
                             <td className="text-right">
                                 <span className="text-sm">{new Date(news.pubDate).toLocaleDateString()}</span>
