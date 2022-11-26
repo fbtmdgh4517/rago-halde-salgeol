@@ -40,8 +40,7 @@ const PostViewerContainer = () => {
         }
     };
 
-    const ownPost = (user && user.id) === (post && post.id);
-
+    const ownPost = (user && user._id) === (post && post.author._id);
     return (
         <PostViewer
             post={post}
