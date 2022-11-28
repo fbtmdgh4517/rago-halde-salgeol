@@ -28,7 +28,16 @@ const CoinPriceUpTopRank = () => {
                 filteredPaprikaApiData.sort((a, b) => {
                     return b.quotes.KRW.percent_change_24h - a.quotes.KRW.percent_change_24h;
                 });
+
+                console.log('코인 파프리카 api에서 가져온 코인의 정보');
+                console.log(response.data);
+                console.log('업비트 api에서 가져온 코인의 정보');
+                console.log(krwCoin);
+                console.log(
+                    '코인 파프리카 api에서 가져온 코인의 정보 중에서 업비트 api에 포함된 코인의 정보를 뽑아온 것'
+                );
                 console.log(filteredPaprikaApiData);
+
                 for (let i = 0; i < 5; i++) {
                     coinsInfoArr.push([
                         filteredPaprikaApiData[i].name,
@@ -56,6 +65,13 @@ const CoinPriceUpTopRank = () => {
                 filteredPaprikaApiData.sort((a, b) => {
                     return b.quotes.KRW.percent_change_7d - a.quotes.KRW.percent_change_7d;
                 });
+
+                console.log('코인 파프리카 api에서 가져온 코인의 정보');
+                console.log(response.data);
+                console.log('업비트 api에서 가져온 코인의 정보');
+                console.log(krwCoin);
+                console.log('코인 파프리카 api에서 가져온 코인의 정보 중에서 업비트 api에 포함된 코인의 정보');
+                console.log(filteredPaprikaApiData);
 
                 for (let i = 0; i < 5; i++) {
                     coinsInfoArr.push([
@@ -85,6 +101,13 @@ const CoinPriceUpTopRank = () => {
                 filteredPaprikaApiData.sort((a, b) => {
                     return b.quotes.KRW.percent_change_30d - a.quotes.KRW.percent_change_30d;
                 });
+
+                console.log('코인 파프리카 api에서 가져온 코인의 정보');
+                console.log(response.data);
+                console.log('업비트 api에서 가져온 코인의 정보');
+                console.log(krwCoin);
+                console.log('코인 파프리카 api에서 가져온 코인의 정보 중에서 업비트 api에 포함된 코인의 정보');
+                console.log(filteredPaprikaApiData);
 
                 for (let i = 0; i < 5; i++) {
                     coinsInfoArr.push([
@@ -116,6 +139,12 @@ const CoinPriceUpTopRank = () => {
                 filteredPaprikaApiData.sort((a, b) => {
                     return b.quotes.KRW.percent_change_1y - a.quotes.KRW.percent_change_1y;
                 });
+
+                console.log('코인 파프리카 api에서 가져온 코인의 정보');
+                console.log(response.data);
+                console.log('업비트 api에서 가져온 코인의 정보');
+                console.log(krwCoin);
+                console.log('코인 파프리카 api에서 가져온 코인의 정보 중에서 업비트 api에 포함된 코인의 정보');
                 console.log(filteredPaprikaApiData);
                 // filteredPaprikaApiData = filteredPaprikaApiData.slice(0, 5);
                 for (let i = 0; i < 5; i++) {
