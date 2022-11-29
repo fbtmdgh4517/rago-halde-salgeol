@@ -74,6 +74,8 @@ function InputForm(props) {
 
             if (enteredPrice === '') {
                 alert('코인의 가격를 입력하세요');
+            } else if (typeof enteredPrice !== 'number') {
+                alert('코인의 가격을 숫자로 입력하세요');
             } else {
                 const currentPriceMultiplyAmount = parseInt(currentCoinPrice * enteredAmount);
                 const timePriceMultiplyAmount = parseInt(selectedTimeCoinPrice * enteredAmount);
@@ -157,7 +159,6 @@ function InputForm(props) {
     return (
         <div id={props.id} className="border border-blue-200 max-w-5xl mx-auto rounded-xl shadow-md p-4">
             <h4 className="pb-4 text-xl font-semibold">코인 계산기</h4>
-            {/* <span>날짜, 마켓 종류, 코인, 금액을 입력하고 버튼을 누르면 </span> */}
             <form className="mt-4" onSubmit={coinSubmitHandler} action="">
                 <DateInputForm
                     className="border border-blue-200 max-w-md container mx-auto rounded-xl shadow-md p-4"
