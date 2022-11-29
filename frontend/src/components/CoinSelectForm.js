@@ -6,7 +6,7 @@ function CoinSelectForm(props) {
     return (
         <div className="max-w-md container mx-auto" id={props.id}>
             <label className="text-lg font-semibold" htmlFor="selectCoin">
-                어떤 코인을
+                코인명
             </label>
             <select className={props.className} id="selectCoin" ref={props.inputRef}>
                 <option value="코인을 선택하세요">코인을 선택하세요</option>
