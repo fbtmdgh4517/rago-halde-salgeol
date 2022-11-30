@@ -36,7 +36,7 @@ function InputForm(props) {
         let enteredAmount = amountInputRef.current.value;
         const enteredCoin = coinInputRef.current.value;
         // const enteredMarket = marketInputRef.current.value;
-        let enteredPrice = priceInputRef.current.value;
+        let enteredPrice = parseInt(priceInputRef.current.value);
 
         const selectedDate = new Date(enteredTime);
         const year = selectedDate.getFullYear();
@@ -44,6 +44,7 @@ function InputForm(props) {
         const day = selectedDate.getDate();
         const hour = selectedDate.getHours();
         const minutes = selectedDate.getMinutes();
+        const selectedDateKST = new Date(year, month - 1, day, hour, minutes).toISOString().slice(0, 16);
         const dateText = `${year}년 ${month}월 ${day}일 ${hour}시 ${minutes}분`;
 
         // console.log(enteredTime);
@@ -53,8 +54,11 @@ function InputForm(props) {
         // console.log('-------------------');
         try {
             const selectedTimeCoinInfo = await axios.get(
-                `https://api.upbit.com/v1/candles/minutes/1?market=${enteredCoin}&to=${enteredTime}:00Z&count=1`
+                `https://api.upbit.com/v1/candles/minutes/1?market=${enteredCoin}&to=${selectedDateKST}:00Z&count=1`
             );
+            console.log(enteredTime);
+            console.log(selectedDateKST);
+            console.log(selectedTimeCoinInfo.data[0].candle_date_time_kst);
             console.log(selectedTimeCoinInfo.data[0]);
             const selectedTimeCoinPrice = selectedTimeCoinInfo.data[0].trade_price;
 
