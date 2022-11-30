@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from '../../../node_modules/axios/index';
+import NewsPagination from '../../components/NewsPagination';
 
 const NewsListContainer = () => {
     const newsArray = [];
     const [news, setNews] = useState([]);
+    const [limit, setLimit] = useState(20);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +44,7 @@ const NewsListContainer = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {news.map((news) => (
+                    {news.slice(offset, offset + limit).map((news) => (
                         <tr className="hover:bg-blue-100/60">
                             <td className="pt-1">
                                 <button onClick={() => window.open(`${news.link}`, '_blank')}>{news.title}</button>
@@ -51,8 +55,20 @@ const NewsListContainer = () => {
                             </td>
                         </tr>
                     ))}
+                    {/* {news.map((news) => (
+                        <tr className="hover:bg-blue-100/60">
+                            <td className="pt-1">
+                                <button onClick={() => window.open(`${news.link}`, '_blank')}>{news.title}</button>
+                                <a href={news.link}>{news.title}</a>
+                            </td>
+                            <td className="text-center">
+                                <span>{new Date(news.pubDate).toLocaleString()}</span>
+                            </td>
+                        </tr>
+                    ))} */}
                 </tbody>
             </table>
+            <NewsPagination total={news.length} limit={limit} page={page} setPage={setPage} />
         </div>
     );
 };
