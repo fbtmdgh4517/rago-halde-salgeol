@@ -8,7 +8,7 @@ const PostListPage = () => {
         <>
             <HeaderContainer />
             <PostListContainer />
-            <PaginationContainer />
+            {/* <PaginationContainer /> */}
         </>
     );
 };
