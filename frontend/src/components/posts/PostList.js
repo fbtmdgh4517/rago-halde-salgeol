@@ -5,6 +5,8 @@ import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
+import Pagination from 'react-js-pagination';
+import { useState } from 'react';
 
 const PostListBlock = styled(Responsive)`
     margin-top: 1rem;
@@ -101,9 +103,17 @@ const PostItem = ({ post }) => {
 };
 
 const PostList = ({ posts, loading, error, showWriteButton }) => {
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * 10;
+
+    const pageChangeHandler = (page) => {
+        setPage(page);
+    };
+
     if (error) {
         return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
     }
+
     return (
         <div className="mt-4 max-w-5xl mx-auto">
             <div className="">
@@ -120,12 +130,28 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
             {!loading && posts && (
                 <div>
                     <ul className="divide-y divide-blue-300">
-                        {posts.map((post) => (
+                        {posts.slice(offset, offset + 10).map((post) => (
                             <PostItem post={post} key={post._id} />
                         ))}
                     </ul>
                 </div>
             )}
+            <div className="mx-auto items-center flex justify-center">
+                <Pagination
+                    innerClass="inline-flex items-center -space-x-px"
+                    itemClassFirst="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+                    itemClassLast="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+                    itemClass="px-3 py-2 leading-tight bg-white border border-gray-300"
+                    activeClass="z-10 px-3 py-2 leading-tight text-white border border-blue-300 bg-blue-500"
+                    activePage={page}
+                    itemsCountPerPage={10}
+                    totalItemsCount={posts && posts.length}
+                    pageRangeDisplayed={5}
+                    prevPageText={'<'}
+                    nextPageText={'>'}
+                    onChange={pageChangeHandler}
+                />
+            </div>
         </div>
     );
     // return (
