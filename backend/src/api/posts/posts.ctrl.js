@@ -99,8 +99,8 @@ export const list = async (ctx) => {
         const posts = await Post.find(query)
             .populate('author', 'username')
             .sort({ _id: -1 })
-            .limit(10)
-            .skip((page - 1) * 10)
+            // .limit(10)
+            // .skip((page - 1) * 10)
             .lean()
             .exec();
         const postCount = await Post.countDocuments(query).exec();
