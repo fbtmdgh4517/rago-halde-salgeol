@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Pagination from 'react-js-pagination';
 import axios from '../../../node_modules/axios/index';
 import NewsPagination from '../../components/NewsPagination';
 
@@ -9,6 +10,10 @@ const NewsListContainer = () => {
     const [limit, setLimit] = useState(20);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
+
+    const pageChangeHandler = (page) => {
+        setPage(page);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,7 +73,23 @@ const NewsListContainer = () => {
                     ))} */}
                 </tbody>
             </table>
-            <NewsPagination total={news.length} limit={limit} page={page} setPage={setPage} />
+            {/* <NewsPagination total={news.length} limit={limit} page={page} setPage={setPage} /> */}
+            <div className="mx-auto items-center flex justify-center">
+                <Pagination
+                    innerClass="inline-flex items-center -space-x-px"
+                    itemClassFirst="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+                    itemClassLast="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+                    itemClass="px-3 py-2 leading-tight bg-white border border-gray-300"
+                    activeClass="z-10 px-3 py-2 leading-tight text-white border border-blue-300 bg-blue-500"
+                    activePage={page}
+                    itemsCountPerPage={20}
+                    totalItemsCount={news.length}
+                    pageRangeDisplayed={5}
+                    prevPageText={'<'}
+                    nextPageText={'>'}
+                    onChange={pageChangeHandler}
+                />
+            </div>
         </div>
     );
 };
