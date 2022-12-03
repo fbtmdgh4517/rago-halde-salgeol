@@ -55,30 +55,6 @@ router.get('/search/news', async (ctx) => {
         },
     });
     ctx.body = response.data;
-    // console.log(response.data);
-    // request.get(options, (error, response, body) => {
-    //     if (!error && response.statusCode == 200) {
-    //         let newsItems = JSON.parse(body).items;
-    //         for (let i = 0; i < newsItems.length; i++) {
-    //             let newsItem = {};
-    //             newsItem.title = newsItems[i].title.replace(/(<([^>]+)>)|&quot;/gi, '');
-    //             newsItem.link = newsItems[i].link.replace(/(<([^>]+)>)|&quot;/gi, '');
-    //             newsItem.description = newsItems[i].description.replace(/(<([^>]+)>)|&quot;/gi, '');
-    //             newsItem.pubDate = newsItems[i].pubDate.replace(/(<([^>]+)>)|&quot;/gi, '');
-    //             newsArray.push(newsItem);
-    //         }
-    //         // ctx.toJSON = newsArray;
-    //         // console.log(ctx.toJSON);
-    //         ctx.body = newsArray;
-    //         console.log(ctx.body);
-    //     } else {
-    //         ctx.status(response.statusCode).end();
-    //         console.log('error = ' + response.statusCode);
-    //     }
-    // });
-    // ctx.body = newsArray;
-    // console.log(ctx.body);
-    // console.log(newsArray);
 });
 
 app.use(router.routes()).use(router.allowedMethods());
