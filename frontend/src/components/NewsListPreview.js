@@ -11,7 +11,7 @@ const NewsListPreview = () => {
             try {
                 const response = await axios.get('/search/news');
                 // console.log(response.data.items);
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 6; i++) {
                     let newsItem = {};
                     newsItem.title = response.data.items[i].title.replace(/(<([^>]+)>)|&quot;|&apos;|&amp;/gi, '');
                     newsItem.link = response.data.items[i].link.replace(/(<([^>]+)>)|&quot;/gi, '');
