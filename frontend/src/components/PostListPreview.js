@@ -22,11 +22,14 @@ const PostListPreview = () => {
         const tag = searchParams.get('tag');
         const page = parseInt(searchParams.get('page'), 10) || 1;
         dispatch(listPosts({ tag, username, page }));
+    }, [dispatch, searchParams, username]);
+
+    useEffect(() => {
         if (posts) {
             const postsSlice = posts.slice(0, 6);
             setSlicedPost(postsSlice);
         }
-    }, [dispatch, searchParams, username]);
+    }, [posts]);
 
     return (
         <div className="bg-white border border-blue-200 w-full mx-auto shadow-md p-4 mb-9 rounded-xl">
