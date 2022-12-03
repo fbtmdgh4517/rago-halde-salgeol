@@ -10,24 +10,6 @@ const PostActionButtonsBlock = styled.div`
     margin-top: -1.5rem;
 `;
 
-const ActionButton = styled.button`
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    color: ${palette.gray[6]};
-    font-weight: bold;
-    border: none;
-    outline: none;
-    font-size: 0.875rem;
-    cursor: pointer;
-    &:hover {
-        background: ${palette.gray[1]};
-        color: ${palette.cyan[7]};
-    }
-    & + & {
-        margin-left: 0.25rem;
-    }
-`;
-
 const PostActionButtons = ({ onEdit, onRemove }) => {
     const [modal, setModal] = useState(false);
     const onRemoveClick = () => {
@@ -44,8 +26,18 @@ const PostActionButtons = ({ onEdit, onRemove }) => {
     return (
         <>
             <PostActionButtonsBlock>
-                <ActionButton onClick={onEdit}>수정</ActionButton>
-                <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
+                <button
+                    className="px-2 py-1 rounded text-gray-400 font-semibold border-none outline-none text-sm cursor-pointer hover:bg-blue-100 hover:text-blue-500"
+                    onClick={onEdit}
+                >
+                    수정
+                </button>
+                <button
+                    className="px-2 py-1 rounded text-gray-400 font-semibold border-none outline-none text-sm cursor-pointer hover:bg-blue-100 hover:text-blue-500"
+                    onClick={onRemoveClick}
+                >
+                    삭제
+                </button>
             </PostActionButtonsBlock>
             <AskRemoveModal visible={modal} onConfirm={onConfirm} onCancel={onCancel} />
         </>

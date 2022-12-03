@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
+import { useEffect } from 'react';
+import axios from '../../../node_modules/axios/index';
 
-const CommentsListBlock = styled(Responsive)`
-    margin-top: 3rem;
-    max-width: 64rem;
-`;
 const CommentItemBlock = styled.div`
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -28,30 +26,42 @@ const CommentActionButtonsBlock = styled.div`
     margin-top: -1.5rem;
 `;
 
-const ActionButton = styled.span`
-    color: ${palette.gray[6]};
-    border: none;
-    outline: none;
-    font-size: 0.875rem;
-    cursor: pointer;
-    &:hover {
-        text-decoration: underline;
-        background: ${palette.gray[1]};
-        color: ${palette.cyan[7]};
-    }
-    & + & {
-        margin-left: 0.25rem;
-    }
-`;
+const CommentItem = ({ user, comment, onToggleAskRemove, postId, commentId }) => {
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(`/api/posts/${postId}/comments/${commentId}`);
+    //             console.log(response);
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     }
+    //     fetchData();
+    // }, [])
 
-const CommentItem = ({ user, comment, onToggleAskRemove }) => {
+    const updateClickHandler = async () => {
+        console.log(postId);
+        console.log(commentId);
+        try {
+            const response = await axios.put(`/api/posts/${postId}/comments/${commentId}`);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <CommentItemBlock>
             <SubInfo username={comment.authorId.username} publishedDate={comment.createdAt} />
             {user && user._id === comment.authorId._id && (
                 <CommentActionButtonsBlock>
-                    <ActionButton>수정</ActionButton>
-                    <ActionButton onClick={() => onToggleAskRemove(comment._id)}>삭제</ActionButton>
+                    {/* <ActionButton onClick={updateClickHandler}>수정</ActionButton> */}
+                    <button
+                        className="px-2 py-1 rounded text-gray-400 font-semibold border-none outline-none text-sm cursor-pointer hover:bg-blue-100 hover:text-blue-500"
+                        onClick={() => onToggleAskRemove(comment._id)}
+                    >
+                        삭제
+                    </button>
                 </CommentActionButtonsBlock>
             )}
             <p>{comment.body}</p>
@@ -59,7 +69,7 @@ const CommentItem = ({ user, comment, onToggleAskRemove }) => {
     );
 };
 
-const CommentsList = ({ loading, user, comments, onToggleAskRemove }) => {
+const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId, commentId }) => {
     return (
         <div className="mt-12 max-w-5xl">
             <div className="">
@@ -71,6 +81,8 @@ const CommentsList = ({ loading, user, comments, onToggleAskRemove }) => {
                                 comment={comment}
                                 onToggleAskRemove={onToggleAskRemove}
                                 key={comment._id}
+                                postId={postId}
+                                commentId={commentId}
                             />
                         ))}
                     </>

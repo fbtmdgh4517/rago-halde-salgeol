@@ -18,7 +18,7 @@ const CommentInput = ({ onChangeCommentInput, body }) => {
     return (
         <>
             <input
-                className="h-12 w-full border border-blue-500 shadow-md rounded-lg p-3"
+                className="h-12 w-full border border-gray-400 shadow-md rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 value={body}
                 onChange={onChange}
                 placeholder="댓글을 입력하세요"
