@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import CoinNews from './CoinNews';
 import InputForm from './InputForm';
 import ResultForm from './ResultForm';
 
