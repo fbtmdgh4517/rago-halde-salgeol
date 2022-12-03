@@ -18,7 +18,6 @@ const CommentsViewerContainer = () => {
         user: user.user,
     }));
     useEffect(() => {
-        // console.log(match);
         dispatch(listComments(postId));
     }, [dispatch, postId]);
 
@@ -43,6 +42,11 @@ const CommentsViewerContainer = () => {
         dispatch(removeComment(postId, commentId));
     }, [dispatch, postId, commentId]);
 
+    console.log(postId);
+    if (comments) {
+        console.log(comments[0]._id);
+    }
+
     return (
         <>
             <CommentsViewer
@@ -53,6 +57,8 @@ const CommentsViewerContainer = () => {
                 onWriteComment={onWriteComment}
                 comments={comments}
                 onToggleAskRemove={onToggleAskRemove}
+                postId={postId}
+                commentId={comments && comments[0]._id}
             />
             <AskModal
                 title="댓글 삭제"

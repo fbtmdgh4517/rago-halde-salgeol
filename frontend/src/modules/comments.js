@@ -16,6 +16,9 @@ const TOGGLE_ASK_REMOVE = 'comment/TOGGLE_ASK_REMOVE';
 const [REMOVE_COMMENT, REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAILURE] =
     createRequestActionTypes('comment/REMOVE_COMMENT');
 
+const [UPDATE_COMMENT, UPDATE_COMMENT_SUCCESS, UPDATE_COMMENT_FAILURE] =
+    createRequestActionTypes('comment/UPDATE_COMMENT');
+
 const CANCEL_REMOVE_COMMENT = 'comment/CANCEL_REMOVE_COMMENT';
 
 export const changeInput = createAction(CHANGE_INPUT, (body) => body);
@@ -31,16 +34,21 @@ export const listComments = createAction(LIST_COMMENT, (postId) => postId);
 export const removeComment = createAction(REMOVE_COMMENT, (postId, commentId) => ({ postId, commentId }));
 export const cancelRemoveComment = createAction(CANCEL_REMOVE_COMMENT);
 
+export const updateComment = createAction(UPDATE_COMMENT, (postId, commentId, body) => ({ postId, commentId, body }));
+
 const writeCommentSaga = createRequestSaga(WRITE_COMMENT, commentAPI.writeComment);
 
 const listCommentSaga = createRequestSaga(LIST_COMMENT, commentAPI.listComments);
 
 const removeCommentSaga = createRequestSaga(REMOVE_COMMENT, commentAPI.removeComment);
 
+const updateCommentSaga = createRequestSaga(UPDATE_COMMENT, commentAPI.updateComment);
+
 export function* CommentsSaga() {
     yield takeLatest(WRITE_COMMENT, writeCommentSaga);
     yield takeLatest(LIST_COMMENT, listCommentSaga);
     yield takeLatest(REMOVE_COMMENT, removeCommentSaga);
+    yield takeLatest(UPDATE_COMMENT, updateCommentSaga);
 }
 
 const initialState = {
@@ -107,6 +115,15 @@ const comments = handleActions(
             removeComment: {
                 commentId: null,
             },
+        }),
+        [UPDATE_COMMENT]: (state, { payload: comments }) => ({
+            ...state,
+            body: comments.body,
+            // originalCommentId: comments._id,
+        }),
+        [UPDATE_COMMENT_SUCCESS]: (state, { payload: comments }) => ({
+            ...state,
+            comments,
         }),
     },
     initialState
