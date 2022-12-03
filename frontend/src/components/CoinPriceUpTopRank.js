@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from '../../node_modules/axios/index';
-import ReactApexChart from 'react-apexcharts';
 import CoinPriceDownTopRank from './CoinPriceDownTopRank';
 
 const CoinPriceUpTopRank = () => {
@@ -146,20 +145,17 @@ const CoinPriceUpTopRank = () => {
                 console.log(krwCoin);
                 console.log('코인 파프리카 api에서 가져온 코인의 정보 중에서 업비트 api에 포함된 코인의 정보');
                 console.log(filteredPaprikaApiData);
-                // filteredPaprikaApiData = filteredPaprikaApiData.slice(0, 5);
                 for (let i = 0; i < 5; i++) {
                     coinsInfoArr.push([
                         filteredPaprikaApiData[i].name,
                         filteredPaprikaApiData[i].quotes.KRW.percent_change_1y,
                     ]);
                 }
-                // console.log(coinsInfoArr);
                 setCoinsInfo(coinsInfoArr);
             };
             fetchData();
         }
     }, [period]);
-    // console.log(chartData);
 
     const periodChangeHandler = (event) => {
         setPeriod(event.target.value);

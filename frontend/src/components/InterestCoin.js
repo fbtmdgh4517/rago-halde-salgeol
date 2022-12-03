@@ -1,8 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import { Link } from 'react-router-dom';
 import { useFetchMarketCode, useUpbitWebSocket } from '../../node_modules/use-upbit-api/lib/index';
-import { MiniChart } from 'react-ts-tradingview-widgets';
 
 const RealTimePriceTable = memo(function RealTimePriceTable({ socketData }) {
     socketData.sort(function (a, b) {
@@ -58,11 +55,11 @@ const InterestCoin = () => {
     const { socket, isConnected, socketData } = useUpbitWebSocket(targetMarketCode, 'ticker', webSocketOptions);
 
     // 연결 컨트롤 버튼 이벤트 핸들러
-    const connectButtonHandler = (evt) => {
-        if (isConnected && socket) {
-            socket.close();
-        }
-    };
+    // const connectButtonHandler = (evt) => {
+    //     if (isConnected && socket) {
+    //         socket.close();
+    //     }
+    // };
 
     return (
         <>

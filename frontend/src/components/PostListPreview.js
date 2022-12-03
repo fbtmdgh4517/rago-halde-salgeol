@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
 import { listPosts } from '../modules/posts';
 import PostItemPreview from './posts/PostItemPreview';
-import PostList from './posts/PostList';
 
 const PostListPreview = () => {
     const [slicedPost, setSlicedPost] = useState([]);
@@ -24,7 +23,6 @@ const PostListPreview = () => {
         const page = parseInt(searchParams.get('page'), 10) || 1;
         dispatch(listPosts({ tag, username, page }));
         if (posts) {
-            // console.log(posts[0]);
             const postsSlice = posts.slice(0, 6);
             setSlicedPost(postsSlice);
         }

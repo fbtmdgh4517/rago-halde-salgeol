@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import CommentInput from '../comments/CommentInput';
-import Button from '../../components/common/Button';
 import CommentsList from '../comments/CommentsList';
 
 const CommentsViewerBlock = styled(Responsive)`
@@ -11,13 +9,17 @@ const CommentsViewerBlock = styled(Responsive)`
     max-width: 64rem;
 `;
 
-const CommentButtonBlock = styled.div`
-    margin-top: 1rem;
-    display: flex;
-    justify-content: flex-end;
-`;
-
-const CommentsViewer = ({ loading, user, body, onChangeCommentInput, onWriteComment, comments, onToggleAskRemove }) => {
+const CommentsViewer = ({
+    loading,
+    user,
+    body,
+    onChangeCommentInput,
+    onWriteComment,
+    comments,
+    onToggleAskRemove,
+    postId,
+    commentId,
+}) => {
     return (
         <CommentsViewerBlock>
             <CommentInput onChangeCommentInput={onChangeCommentInput} body={body} />
@@ -27,7 +29,14 @@ const CommentsViewer = ({ loading, user, body, onChangeCommentInput, onWriteComm
             >
                 댓글 작성
             </button>
-            <CommentsList user={user} comments={comments} loading={loading} onToggleAskRemove={onToggleAskRemove} />
+            <CommentsList
+                user={user}
+                comments={comments}
+                loading={loading}
+                onToggleAskRemove={onToggleAskRemove}
+                postId={postId}
+                commentId={commentId}
+            />
         </CommentsViewerBlock>
     );
 };

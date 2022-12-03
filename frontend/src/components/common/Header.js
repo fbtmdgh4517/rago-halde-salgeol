@@ -1,48 +1,11 @@
 import styled from 'styled-components';
-import Responsive from './Responsive';
-import Button from './Button';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
-const HeaderBlock = styled.div`
-    position: sticky;
-    width: 100%;
-    background: white;
-    border-bottom: solid 1px rgb(187, 187, 187);
-`;
-
-const Wrapper = styled(Responsive)`
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-    .logo {
-        font-size: 1.125rem;
-        font-weight: 800;
-        letter-spacing: 2px;
-        text-decoration: none;
-    }
-    .right {
-        display: flex;
-        align-items: center;
-    }
-`;
 
 const Spacer = styled.div`
     height: 1rem;
 `;
 
-const UserInfo = styled.div`
-    font-weight: 800;
-    margin-right: 1rem;
-`;
-
 const Header = ({ user, onLogout }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const navClickHandler = () => {
-        setIsOpen(!isOpen);
-    };
     return (
         <>
             <header className="border-blue-300 sticky top-0 z-20 flex h-16 items-center border-b bg-white py-5 text-base leading-6 font-semibold">
@@ -55,8 +18,7 @@ const Header = ({ user, onLogout }) => {
                             <div className="ml-3 hidden items-center space-x-7 md:flex lg:ml-[105px] ">
                                 <div className="shrink-0">
                                     <Link
-                                        onClick={navClickHandler}
-                                        className={`text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200`}
+                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
                                         to="/postList"
                                     >
                                         <span className="hover:no-underline font-semibold">게시판</span>
@@ -89,15 +51,6 @@ const Header = ({ user, onLogout }) => {
                                         <span className="hover:no-underline font-semibold">뉴스</span>
                                     </Link>
                                 </div>
-                                {/* <div className="h-3 w-[1px] bg-gray-400"></div>
-                                <div className="shrink-0">
-                                    <a
-                                        className="text-blue-500 text-base font-medium rounded-xl p-2 transition ease-out hover:bg-blue-500  hover:text-white duration-200"
-                                        href="/notice"
-                                    >
-                                        <span className="hover:no-underline font-semibold">공지사항</span>
-                                    </a>
-                                </div> */}
                             </div>
                         </div>
                     </div>

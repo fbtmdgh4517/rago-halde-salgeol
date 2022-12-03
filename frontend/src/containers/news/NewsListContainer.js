@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Pagination from 'react-js-pagination';
 import axios from '../../../node_modules/axios/index';
-import NewsPagination from '../../components/NewsPagination';
 
 const NewsListContainer = () => {
     const newsArray = [];
@@ -53,27 +52,14 @@ const NewsListContainer = () => {
                         <tr className="hover:bg-blue-100/60">
                             <td className="pt-1">
                                 <button onClick={() => window.open(`${news.link}`, '_blank')}>{news.title}</button>
-                                {/* <a href={news.link}>{news.title}</a> */}
                             </td>
                             <td className="text-center">
                                 <span>{new Date(news.pubDate).toLocaleString()}</span>
                             </td>
                         </tr>
                     ))}
-                    {/* {news.map((news) => (
-                        <tr className="hover:bg-blue-100/60">
-                            <td className="pt-1">
-                                <button onClick={() => window.open(`${news.link}`, '_blank')}>{news.title}</button>
-                                <a href={news.link}>{news.title}</a>
-                            </td>
-                            <td className="text-center">
-                                <span>{new Date(news.pubDate).toLocaleString()}</span>
-                            </td>
-                        </tr>
-                    ))} */}
                 </tbody>
             </table>
-            {/* <NewsPagination total={news.length} limit={limit} page={page} setPage={setPage} /> */}
             <div className="mx-auto items-center flex justify-center">
                 <Pagination
                     innerClass="inline-flex items-center -space-x-px"

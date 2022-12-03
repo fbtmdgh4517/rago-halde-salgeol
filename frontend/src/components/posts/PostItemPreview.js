@@ -9,15 +9,9 @@ const PostItemPreview = ({ post }) => {
                     {title.length < 25 ? title : `${title.slice(0, 25)}...`}
                 </Link>
             </td>
-            {/* <td>
-                <span>{author.username}</span>
-            </td> */}
             <td className="text-right">
                 <span className="text-sm">{new Date(publishedDate).toLocaleDateString()}</span>
             </td>
-            {/* <SubInfo username={user.username} publishedDate={new Date(publishedDate)} /> */}
-            {/* <Tags tags={tags} />
-            <p>{body}</p> */}
         </>
     );
 };

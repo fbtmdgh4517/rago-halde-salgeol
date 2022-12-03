@@ -258,11 +258,11 @@ const QuotePage = () => {
     };
 
     // 연결 컨트롤 버튼 이벤트 핸들러
-    const connectButtonHandler = (evt) => {
-        if (isConnected && socket) {
-            socket.close();
-        }
-    };
+    // const connectButtonHandler = (evt) => {
+    //     if (isConnected && socket) {
+    //         socket.close();
+    //     }
+    // };
 
     return (
         <>
