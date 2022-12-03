@@ -18,7 +18,7 @@ const CommentsViewer = ({
     comments,
     onToggleAskRemove,
     postId,
-    commentId,
+    // commentId,
 }) => {
     return (
         <CommentsViewerBlock>
@@ -35,7 +35,7 @@ const CommentsViewer = ({
                 loading={loading}
                 onToggleAskRemove={onToggleAskRemove}
                 postId={postId}
-                commentId={commentId}
+                // commentId={commentId}
             />
         </CommentsViewerBlock>
     );

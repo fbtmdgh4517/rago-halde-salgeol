@@ -24,7 +24,7 @@ const CommentActionButtonsBlock = styled.div`
     margin-top: -1.5rem;
 `;
 
-const CommentItem = ({ user, comment, onToggleAskRemove, postId, commentId }) => {
+const CommentItem = ({ user, comment, onToggleAskRemove, postId }) => {
     // useEffect(() => {
     //     const fetchData = async () => {
     //         try {
@@ -37,16 +37,16 @@ const CommentItem = ({ user, comment, onToggleAskRemove, postId, commentId }) =>
     //     fetchData();
     // }, [])
 
-    const updateClickHandler = async () => {
-        console.log(postId);
-        console.log(commentId);
-        try {
-            const response = await axios.put(`/api/posts/${postId}/comments/${commentId}`);
-            console.log(response);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    // const updateClickHandler = async () => {
+    //     console.log(postId);
+    //     console.log(commentId);
+    //     try {
+    //         const response = await axios.put(`/api/posts/${postId}/comments/${commentId}`);
+    //         console.log(response);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
     return (
         <CommentItemBlock>
@@ -67,7 +67,7 @@ const CommentItem = ({ user, comment, onToggleAskRemove, postId, commentId }) =>
     );
 };
 
-const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId, commentId }) => {
+const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId }) => {
     return (
         <div className="mt-12 max-w-5xl">
             <div className="">
@@ -80,7 +80,7 @@ const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId, comm
                                 onToggleAskRemove={onToggleAskRemove}
                                 key={comment._id}
                                 postId={postId}
-                                commentId={commentId}
+                                // commentId={commentId}
                             />
                         ))}
                     </>

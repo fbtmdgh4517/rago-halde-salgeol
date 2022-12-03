@@ -44,7 +44,7 @@ const CommentsViewerContainer = () => {
 
     console.log(postId);
     if (comments) {
-        console.log(comments[0]._id);
+        console.log(comments);
     }
 
     return (
@@ -58,7 +58,7 @@ const CommentsViewerContainer = () => {
                 comments={comments}
                 onToggleAskRemove={onToggleAskRemove}
                 postId={postId}
-                commentId={comments && comments[0]._id}
+                // commentId={comments && comments[0]._id}
             />
             <AskModal
                 title="댓글 삭제"
