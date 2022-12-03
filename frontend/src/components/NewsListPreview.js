@@ -10,7 +10,6 @@ const NewsListPreview = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/search/news');
-                // console.log(response.data.items);
                 for (let i = 0; i < 6; i++) {
                     let newsItem = {};
                     newsItem.title = response.data.items[i].title.replace(/(<([^>]+)>)|&quot;|&apos;|&amp;/gi, '');
@@ -19,7 +18,6 @@ const NewsListPreview = () => {
                     newsItem.pubDate = response.data.items[i].pubDate.replace(/(<([^>]+)>)|&quot;/gi, '');
                     newsArray.push(newsItem);
                 }
-                // console.log(newsArray);
                 setNews(newsArray);
             } catch (e) {
                 console.log(e);
@@ -44,9 +42,6 @@ const NewsListPreview = () => {
                                 <button onClick={() => window.open(`${news.link}`, '_blank')}>
                                     {news.title.length < 32 ? news.title : `${news.title.slice(0, 32)}...`}
                                 </button>
-                                {/* <a href={news.link}>
-                                    {news.title.length < 32 ? news.title : `${news.title.slice(0, 32)}...`}
-                                </a> */}
                             </td>
                             <td className="text-right">
                                 <span className="text-sm">{new Date(news.pubDate).toLocaleDateString()}</span>
