@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from 'react';
-import axios from '../../node_modules/axios/index';
 import { useFetchMarketCode, useUpbitWebSocket } from '../../node_modules/use-upbit-api/lib/index';
 import HeaderContainer from '../containers/common/HeaderContainer';
 
