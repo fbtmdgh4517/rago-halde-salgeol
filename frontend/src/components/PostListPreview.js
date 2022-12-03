@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -7,6 +8,7 @@ import PostItemPreview from './posts/PostItemPreview';
 import PostList from './posts/PostList';
 
 const PostListPreview = () => {
+    const [slicedPost, setSlicedPost] = useState([]);
     const { username } = useParams();
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
@@ -17,13 +19,15 @@ const PostListPreview = () => {
         user: user.user,
     }));
 
-    // console.log(posts[0]);
-    // const postsSlice = posts.slice(0, 5);
-
     useEffect(() => {
         const tag = searchParams.get('tag');
         const page = parseInt(searchParams.get('page'), 10) || 1;
         dispatch(listPosts({ tag, username, page }));
+        if (posts) {
+            // console.log(posts[0]);
+            const postsSlice = posts.slice(0, 6);
+            setSlicedPost(postsSlice);
+        }
     }, [dispatch, searchParams, username]);
 
     return (
@@ -37,7 +41,7 @@ const PostListPreview = () => {
             {!loading && posts && (
                 <table className="table-auto w-full">
                     <tbody className="">
-                        {posts.map((post) => (
+                        {slicedPost.map((post) => (
                             <tr className="hover:bg-blue-100/60">
                                 <PostItemPreview post={post} key={post._id} />
                             </tr>
