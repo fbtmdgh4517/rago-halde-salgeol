@@ -43,15 +43,16 @@ export const update = async (ctx) => {
     const { commentId } = ctx.params;
     try {
         console.log(ctx.params);
-        await Comment.findByIdAndUpdate(commentId, ctx.request.body.body, {
+        console.log(ctx.request.body);
+        const comment = await Comment.findByIdAndUpdate(commentId, ctx.request.body, {
             new: true,
-        });
-        const comments = await Comment.find({ postId: ctx.params.postId })
-            .populate('authorId', 'username')
-            .sort({ createdAt: 1 })
-            .lean()
-            .exec();
-        ctx.body = comments;
+        }).exec();
+        // const comments = await Comment.find({ postId: ctx.params.postId })
+        //     .populate('authorId', 'username')
+        //     .sort({ createdAt: 1 })
+        //     .lean()
+        //     .exec();
+        ctx.body = comment;
     } catch (e) {
         ctx.throw(500, e);
     }

@@ -7,7 +7,7 @@ comments.post('/', commentsCtrl.write);
 
 comments.get('/', commentsCtrl.list);
 
-comments.patch('/:commentId', commentsCtrl.update);
+comments.put('/:commentId', commentsCtrl.update);
 
 comments.delete('/:commentId', commentsCtrl.remove);
 
