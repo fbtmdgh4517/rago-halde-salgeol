@@ -17,6 +17,7 @@ const CommentsViewerContainer = () => {
         loading: loading['comments/LIST_COMMENTS'],
         user: user.user,
     }));
+
     useEffect(() => {
         dispatch(listComments(postId));
     }, [dispatch, postId]);
@@ -42,24 +43,20 @@ const CommentsViewerContainer = () => {
         dispatch(removeComment(postId, commentId));
     }, [dispatch, postId, commentId]);
 
-    console.log(postId);
-    if (comments) {
-        console.log(comments);
-    }
-
     return (
         <>
-            <CommentsViewer
-                loading={loading}
-                user={user}
-                body={body}
-                onChangeCommentInput={onChangeCommentInput}
-                onWriteComment={onWriteComment}
-                comments={comments}
-                onToggleAskRemove={onToggleAskRemove}
-                postId={postId}
-                // commentId={comments && comments[0]._id}
-            />
+            {comments && (
+                <CommentsViewer
+                    loading={loading}
+                    user={user}
+                    body={body}
+                    onChangeCommentInput={onChangeCommentInput}
+                    onWriteComment={onWriteComment}
+                    comments={comments}
+                    onToggleAskRemove={onToggleAskRemove}
+                    postId={postId}
+                />
+            )}
             <AskModal
                 title="댓글 삭제"
                 description="이 댓글을 정말로 삭제하시겠습니까?"

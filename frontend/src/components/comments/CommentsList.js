@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
@@ -25,35 +25,42 @@ const CommentActionButtonsBlock = styled.div`
 `;
 
 const CommentItem = ({ user, comment, onToggleAskRemove, postId }) => {
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get(`/api/posts/${postId}/comments/${commentId}`);
-    //             console.log(response);
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    //     fetchData();
-    // }, [])
+    const [selectedUpdateComment, setSelectedUpdateComment] = useState(false);
+    const [updateComment, setUpdateComment] = useState(comment.body);
 
-    // const updateClickHandler = async () => {
-    //     console.log(postId);
-    //     console.log(commentId);
-    //     try {
-    //         const response = await axios.put(`/api/posts/${postId}/comments/${commentId}`);
-    //         console.log(response);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
+    const updateClickHandler = () => {
+        setSelectedUpdateComment(!selectedUpdateComment);
+    };
+
+    const onUpdateComment = async () => {
+        try {
+            const response = await axios.put(`/api/posts/${postId}/comments/${comment._id}`, {
+                body: `${updateComment}`,
+            });
+            console.log(response);
+            console.log(updateComment);
+            setSelectedUpdateComment(!selectedUpdateComment);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const onChange = (e) => {
+        console.log(e.target.value);
+        setUpdateComment(e.target.value);
+    };
 
     return (
         <CommentItemBlock>
             <SubInfo username={comment.authorId.username} publishedDate={comment.createdAt} />
             {user && user._id === comment.authorId._id && (
                 <CommentActionButtonsBlock>
-                    {/* <ActionButton onClick={updateClickHandler}>수정</ActionButton> */}
+                    <button
+                        className="px-2 py-1 rounded text-gray-400 font-semibold border-none outline-none text-sm cursor-pointer hover:bg-blue-100 hover:text-blue-500"
+                        onClick={updateClickHandler}
+                    >
+                        수정
+                    </button>
                     <button
                         className="px-2 py-1 rounded text-gray-400 font-semibold border-none outline-none text-sm cursor-pointer hover:bg-blue-100 hover:text-blue-500"
                         onClick={() => onToggleAskRemove(comment._id)}
@@ -62,12 +69,30 @@ const CommentItem = ({ user, comment, onToggleAskRemove, postId }) => {
                     </button>
                 </CommentActionButtonsBlock>
             )}
-            <p>{comment.body}</p>
+            {selectedUpdateComment ? (
+                <div>
+                    <input
+                        className="h-12 w-full border border-gray-400 shadow-md rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        onChange={onChange}
+                        placeholder="댓글을 입력하세요"
+                        rows={2}
+                        maxRows={20}
+                    />
+                    <button
+                        onClick={onUpdateComment}
+                        className="h-9 items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-white shadow-md hover:bg-blue-400 mt-4 flex"
+                    >
+                        수정
+                    </button>
+                </div>
+            ) : (
+                <p>{updateComment}</p>
+            )}
         </CommentItemBlock>
     );
 };
 
-const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId }) => {
+const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId, body, onChangeCommentInput }) => {
     return (
         <div className="mt-12 max-w-5xl">
             <div className="">
@@ -80,7 +105,8 @@ const CommentsList = ({ loading, user, comments, onToggleAskRemove, postId }) =>
                                 onToggleAskRemove={onToggleAskRemove}
                                 key={comment._id}
                                 postId={postId}
-                                // commentId={commentId}
+                                body={body}
+                                onChangeCommentInput={onChangeCommentInput}
                             />
                         ))}
                     </>

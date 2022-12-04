@@ -18,25 +18,31 @@ const CommentsViewer = ({
     comments,
     onToggleAskRemove,
     postId,
-    // commentId,
 }) => {
+    // console.log(postId);
+    // if (comments) {
+    //     console.log(commentId);
+    // }
     return (
         <CommentsViewerBlock>
             <CommentInput onChangeCommentInput={onChangeCommentInput} body={body} />
             <button
-                className="h-9 items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-white shadow-md hover:bg-blue-400 mt-4 flex justify-end"
+                className="h-9 items-center space-x-1 rounded-md bg-blue-500 py-2 px-3 text-white shadow-md hover:bg-blue-400 mt-4 flex"
                 onClick={onWriteComment}
             >
                 댓글 작성
             </button>
-            <CommentsList
-                user={user}
-                comments={comments}
-                loading={loading}
-                onToggleAskRemove={onToggleAskRemove}
-                postId={postId}
-                // commentId={commentId}
-            />
+            {comments && (
+                <CommentsList
+                    user={user}
+                    comments={comments}
+                    loading={loading}
+                    onToggleAskRemove={onToggleAskRemove}
+                    postId={postId}
+                    body={body}
+                    onChangeCommentInput={onChangeCommentInput}
+                />
+            )}
         </CommentsViewerBlock>
     );
 };
